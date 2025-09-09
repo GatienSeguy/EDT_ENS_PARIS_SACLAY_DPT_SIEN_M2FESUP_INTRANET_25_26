@@ -78,7 +78,7 @@ function buildEventsFromData(data){
   var semaines = data.semaines || {};
   var planning = data.planning || {};
 
-  var dayOffset = { "lundi":0, "mardi":1, "mercredi":2, "jeudi":3, "vendredi":4, "samedi":5, "dimanche":6 };
+  var dayOffset = { "lundi":2, "mardi":3, "mercredi":4, "jeudi":5, "vendredi":6, "samedi":0, "dimanche":1 };
 
   function fullTeacher(code){
     if(!code) return "";
