@@ -644,6 +644,9 @@
         }
         
         function init() {
+            // Aller au jour actuel au démarrage
+            goToToday();
+            
             // Événements
             document.getElementById('prevWeek').addEventListener('click', () => changeWeek(-1));
             document.getElementById('nextWeek').addEventListener('click', () => changeWeek(1));
@@ -669,8 +672,6 @@
                     }
                 }
             });
-            
-            updateDisplay();
         }
         
         function changeWeek(direction) {
