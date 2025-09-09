@@ -1,0 +1,261 @@
+{
+  "meta": {
+    "title": "M2 FESup Intranet - 2025/2026 - Semestre 1",
+    "school": "École Normale Supérieure Paris-Saclay"
+  },
+  "professeurs": {
+    "AJ": "Anthony Juton",
+    "PV": "Pascal Varoqui", 
+    "FA": "Fabien Adam",
+    "JPB": "Jean Pierre Barbot",
+    "CD": "Cécile Durieu",
+    "PEL": "Pierre-Etienne Lévy",
+    "EH": "Emmanuel Hoang",
+    "BLP": "Bruno Le Plouffe",
+    "VL": "Vincent Loyau",
+    "FM": "Frédéric Mazaleyrat",
+    "JO": "Javier Ojeda",
+    "DC": "Debernardi Christophe",
+    "JMR": "Jean Marc Roussel",
+    "JMX": "Jean Marcel Rax",
+    "TR": "Thomas Rodet",
+    "EV": "Eric Vourch",
+    "JSM": "Jérôme Saint-Martin",
+    "MGo": "Michèle Gouiffès",
+    "FB": "Franck Bimbard",
+    "AB": "Arnaud Bournel",
+    "MA": "Morgan Almanza",
+    "MAT": "Mohamed Abbas-Turki",
+    "TC": "Thomas Chatain",
+    "MS": "Mihaela Sighireanu"
+  },
+  "semaines": {
+    "35": {
+      "dates": "25 - 30 août",
+      "year": 2024,
+      "startDate": "2024-08-26"
+    },
+    "36": {
+      "dates": "1 - 6 sept",
+      "year": 2024,
+      "startDate": "2024-09-02"
+    },
+    "37": {
+      "dates": "8 - 13 sept",
+      "year": 2024,
+      "startDate": "2024-09-09"
+    },
+    "38": {
+      "dates": "15 - 20 sept",
+      "year": 2024,
+      "startDate": "2024-09-16"
+    },
+    "39": {
+      "dates": "22 - 27 sept",
+      "year": 2024,
+      "startDate": "2024-09-23"
+    },
+    "40": {
+      "dates": "29 sept - 04 oct",
+      "year": 2024,
+      "startDate": "2024-09-30"
+    },
+    "41": {
+      "dates": "6 - 11 oct",
+      "year": 2024,
+      "startDate": "2024-10-07"
+    },
+    "42": {
+      "dates": "13 - 18 oct",
+      "year": 2024,
+      "startDate": "2024-10-14"
+    },
+    "43": {
+      "dates": "20 - 25 oct",
+      "year": 2024,
+      "startDate": "2024-10-21"
+    }
+  },
+  "horaires": {
+    "matin": ["8h-9h", "9h-10h", "10h-11h", "11h-12h", "12h-12h15"],
+    "aprem": ["13h30-14h30", "14h30-15h30", "15h30-16h30", "16h30-17h30", "17h30-17h45"]
+  },
+  "planning": {
+    "36": {
+      "lundi": {
+        "matin": {"cours": "AUTO C/TD1", "prof": "JO", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "EN Fond1 Crs1", "prof": "FA", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "mardi": {
+        "matin": {"cours": "CE1", "prof": "MA", "salle": "2Z48", "heure": "8h-12h15"},
+        "aprem": {"cours": "Présentations leçons", "prof": "Multiple", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "mercredi": {
+        "matin": {"cours": "Journée Portes Ouvertes", "prof": "", "salle": "", "heure": "8h-12h15"},
+        "aprem": {"cours": "Journée Portes Ouvertes", "prof": "", "salle": "", "heure": "13h30-17h45"}
+      },
+      "jeudi": {
+        "matin": {"cours": "Info C++ C/TP2", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "Reso1 C/TD1", "prof": "AJ", "salle": "1Z68", "heure": "13h30-17h45"}
+      },
+      "vendredi": {
+        "matin": {"cours": "Info C++ C/TP1", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "CE2", "prof": "MA", "salle": "2Z48", "heure": "13h30-17h45"}
+      }
+    },
+    "37": {
+      "lundi": {
+        "matin": {"cours": "Devoir AUTO", "prof": "JO", "salle": "1Y40", "heure": "8h-12h15"},
+        "aprem": {"cours": "TS C/TD2", "prof": "CD", "salle": "2Z68", "heure": "13h30-17h45"}
+      },
+      "mardi": {
+        "matin": {"cours": "CE3", "prof": "PEL", "salle": "2Z48", "heure": "8h-12h15"},
+        "aprem": {"cours": "EN Fond2 TP1", "prof": "JSM", "salle": "2Z34", "heure": "13h30-17h45"}
+      },
+      "mercredi": {
+        "matin": {"cours": "CE EH 2Z28 9h-13h", "prof": "EH", "salle": "2Z28", "heure": "9h-13h"},
+        "aprem": {"cours": "TS C/TD3", "prof": "CD", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "jeudi": {
+        "matin": null,
+        "aprem": null
+      },
+      "vendredi": {
+        "matin": {"cours": "WEI", "prof": "", "salle": "", "heure": "8h-12h15"},
+        "aprem": {"cours": "WEI", "prof": "", "salle": "", "heure": "13h30-17h45"}
+      }
+    },
+    "38": {
+      "lundi": {
+        "matin": {"cours": "Info C++ C/TP3", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "EN Fond3 Crs2", "prof": "JPB", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "mardi": {
+        "matin": {"cours": "GL MS/TR LN82+2Z71 8h30", "prof": "MS+TR", "salle": "LN82+2Z71", "heure": "8h30-12h15"},
+        "aprem": {"cours": "CE EH", "prof": "EH", "salle": "2Z28", "heure": "13h30-17h45"}
+      },
+      "mercredi": {
+        "matin": {"cours": "ElNum2", "prof": "FA", "salle": "2Z63", "heure": "8h-12h15"},
+        "aprem": {"cours": "TS C/TP4", "prof": "CD", "salle": "2Z34", "heure": "14h-17h45"}
+      },
+      "jeudi": {
+        "matin": {"cours": "Info C++ C/TP4", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "Prés Ep Dossier", "prof": "", "salle": "1Z68", "heure": "13h30-17h45"}
+      },
+      "vendredi": {
+        "matin": {"cours": "ElNum1", "prof": "FA", "salle": "2Z63", "heure": "8h-12h15"},
+        "aprem": {"cours": "Reso2 TP1", "prof": "AJ", "salle": "GP 2Z71", "heure": "13h30-17h45"}
+      }
+    },
+    "39": {
+      "lundi": {
+        "matin": {"cours": "AUTO C/TD2", "prof": "JO", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "EN Fond4 Crs3", "prof": "JPB", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "mardi": {
+        "matin": {"cours": "GL MS/TR LN82+2Z71 8h30", "prof": "MS+TR", "salle": "LN82+2Z71", "heure": "8h30-12h15"},
+        "aprem": {"cours": "Leçons", "prof": "FA", "salle": "1Z68", "heure": "13h30-17h45"}
+      },
+      "mercredi": {
+        "matin": {"cours": "EN Fond5 TP2", "prof": "FA", "salle": "2Z34", "heure": "8h-12h15"},
+        "aprem": {"cours": "TS C/TP5", "prof": "CD", "salle": "2Z71", "heure": "13h30-17h45"}
+      },
+      "jeudi": {
+        "matin": null,
+        "aprem": null
+      },
+      "vendredi": {
+        "matin": {"cours": "ElNum3", "prof": "FA", "salle": "2Z63", "heure": "8h-12h15"},
+        "aprem": {"cours": "Reso3 C/TD2", "prof": "AJ", "salle": "1Z71", "heure": "13h30-17h45"}
+      }
+    },
+    "40": {
+      "lundi": {
+        "matin": {"cours": "AUTO C/TD3", "prof": "JO", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "TS Examen", "prof": "CD", "salle": "2Z71", "heure": "13h30-17h45"}
+      },
+      "mardi": {
+        "matin": {"cours": "GL MS/TR LN82+2Z71 8h30", "prof": "MS+TR", "salle": "LN82+2Z71", "heure": "8h30-12h15"},
+        "aprem": {"cours": "Telecom43Crs4", "prof": "EV", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "mercredi": {
+        "matin": {"cours": "CE EH 2Z28 9h-13h", "prof": "EH", "salle": "2Z28", "heure": "9h-13h"},
+        "aprem": null
+      },
+      "jeudi": {
+        "matin": {"cours": "Java C/TP1", "prof": "TR", "salle": "2Z71", "heure": "8h30-12h15"},
+        "aprem": null
+      },
+      "vendredi": {
+        "matin": {"cours": "CE4", "prof": "MA", "salle": "2Z48", "heure": "8h-12h15"},
+        "aprem": {"cours": "Reso5 C/TD3", "prof": "MS", "salle": "1Z71", "heure": "13h30-17h45"}
+      }
+    },
+    "41": {
+      "lundi": {
+        "matin": {"cours": "AUTO C/TD4", "prof": "JO", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "Java C/TP2", "prof": "TR", "salle": "2Z71", "heure": "8h30-12h15"}
+      },
+      "mardi": {
+        "matin": {"cours": "GL MS/TR LN82+2Z71 8h30", "prof": "MS+TR", "salle": "LN82+2Z71", "heure": "8h30-12h15"},
+        "aprem": {"cours": "EN Fond6 TP3", "prof": "JSM", "salle": "2Z34", "heure": "13h30-17h45"}
+      },
+      "mercredi": {
+        "matin": null,
+        "aprem": null
+      },
+      "jeudi": {
+        "matin": null,
+        "aprem": {"cours": "Visite C2N", "prof": "", "salle": "", "heure": "13h30-17h45"}
+      },
+      "vendredi": {
+        "matin": {"cours": "Leçon commune", "prof": "", "salle": "2Z48", "heure": "8h-12h15"},
+        "aprem": {"cours": "Reso4 TP2", "prof": "AJ", "salle": "GP 2Z71", "heure": "13h30-17h45"}
+      }
+    },
+    "42": {
+      "lundi": {
+        "matin": {"cours": "AUTO C/TD5", "prof": "JO", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "EN Fond7 TP4", "prof": "JPB", "salle": "2Z34", "heure": "13h30-17h45"}
+      },
+      "mardi": {
+        "matin": {"cours": "GL MS/TR LN82+2Z71 8h30", "prof": "MS+TR", "salle": "LN82+2Z71", "heure": "8h30-12h15"},
+        "aprem": {"cours": "Telecom2 Crs3", "prof": "EV", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "mercredi": {
+        "matin": {"cours": "AUTO TP1", "prof": "JO", "salle": "2Z61", "heure": "8h-12h15"},
+        "aprem": null
+      },
+      "jeudi": {
+        "matin": {"cours": "ElNum5", "prof": "FA", "salle": "2Z63", "heure": "8h-12h15"},
+        "aprem": null
+      },
+      "vendredi": {
+        "matin": {"cours": "Java C/TP3", "prof": "TR", "salle": "2Z71", "heure": "8h30-12h15"},
+        "aprem": {"cours": "Reso6 TP3", "prof": "MS", "salle": "AJ GP 2Z71", "heure": "13h30-17h45"}
+      }
+    },
+    "43": {
+      "lundi": {
+        "matin": {"cours": "AUTO C/TD6", "prof": "JO", "salle": "2Z71", "heure": "8h-12h15"},
+        "aprem": {"cours": "EN Fond8", "prof": "JPB", "salle": "2Z48", "heure": "13h30-17h45"}
+      },
+      "mardi": {
+        "matin": {"cours": "GL MS/TR LN82+2Z71 8h30", "prof": "MS+TR", "salle": "LN82+2Z71", "heure": "8h30-12h15"},
+        "aprem": null
+      },
+      "mercredi": {
+        "matin": null,
+        "aprem": null
+      },
+      "jeudi": {
+        "matin": {"cours": "ElNum6", "prof": "FA", "salle": "2Z63", "heure": "8h-12h15"},
+        "aprem": null
+      },
+      "vendredi": {
+        "matin": {"cours": "CE5", "prof": "MA", "salle": "2Z48", "heure": "8h-12h15"},
+        "aprem": {"cours": "Reso7 C/TD4", "prof": "AJ", "salle": "1Z71", "heure": "13h30-17h45"}
+      }
+    }
+  }
+}

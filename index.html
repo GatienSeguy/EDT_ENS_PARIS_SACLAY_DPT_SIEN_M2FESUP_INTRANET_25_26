@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENS Paris-Saclay - M2 FESup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .school-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .school-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+
+        .nav-button:disabled {
+            background: var(--text-secondary);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .current-week {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .toggle-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .calendar-container {
+            background: var(--card-bg);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .day-view {
+            display: none;
+        }
+
+        .day-view.active {
+            display: block;
+        }
+
+        .day-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .day-date {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .time-slots {
+            padding: 1.5rem;
+        }
+
+        .time-period {
+            margin-bottom: 2rem;
+        }
+
+        .period-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            display: inline-block;
+        }
+
+        .time-slot {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .time-slot:hover {
+            border-color: var(--accent-color);
+            transform: translateX(2px);
+        }
+
+        .time-slot.has-class {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+            border-color: var(--accent-color);
+        }
+
+        .time-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            width: 100px;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+
+        .class-info {
+            flex-grow: 1;
+        }
+
+        .class-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .class-details {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .prof-tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .room-tag {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .week-view {
+            display: none;
+            overflow-x: auto;
+        }
+
+        .week-view.active {
+            display: block;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: 100px repeat(5, 1fr);
+            gap: 1px;
+            background: var(--border-color);
+            min-width: 900px;
+        }
+
+        .week-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 0.5rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .week-time {
+            background: var(--card-bg);
+            padding: 0.75rem 0.5rem;
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .week-cell {
+            background: var(--card-bg);
+            padding: 0.5rem;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            position: relative;
+        }
+
+        .week-cell.has-class {
+            background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+        }
+
+        .week-class {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+
+        .week-class .course-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .week-class .course-details {
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+
+        .empty-slot {
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .today-nav {
+            background: #f59e0b;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .today-nav:hover {
+            background: #d97706;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem 0.5rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-buttons {
+                display: flex;
+                gap: 1rem;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .nav-button, .today-nav {
+                flex: 1;
+                padding: 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .current-week {
+                order: -1;
+                margin-bottom: 0.5rem;
+            }
+
+            .time-slot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                padding: 0.75rem;
+            }
+
+            .time-label {
+                width: 100%;
+                font-weight: 700;
+                color: var(--primary-color);
+            }
+
+            .class-details {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .day-header {
+                padding: 1rem;
+            }
+
+            .day-title {
+                font-size: 1.25rem;
+            }
+
+            .week-grid {
+                grid-template-columns: 80px repeat(5, 1fr);
+                min-width: 100%;
+            }
+
+            .week-class {
+                font-size: 0.65rem;
+                padding: 0.25rem;
+            }
+
+            .view-toggle {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .toggle-btn {
+                width: 200px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="school-logo">École Normale Supérieure Paris-Saclay</div>
+        <div class="school-subtitle">M2 FESup Intranet - 2025/2026</div>
+    </header>
+
+    <div class="container">
+        <nav class="navigation">
+            <div class="nav-buttons">
+                <button class="nav-button" id="prevWeek">← Semaine précédente</button>
+                <button class="today-nav" id="todayBtn">📅 Aujourd'hui</button>
+                <button class="nav-button" id="nextWeek">Semaine suivante →</button>
+            </div>
+            <div class="current-week" id="currentWeekDisplay">Semaine 36 - 1-6 sept</div>
+        </nav>
+
+        <div class="view-toggle">
+            <button class="toggle-btn active" id="dayViewBtn">Vue Jour</button>
+            <button class="toggle-btn" id="weekViewBtn">Vue Semaine</button>
+        </div>
+
+        <div class="calendar-container">
+            <!-- Vue jour -->
+            <div class="day-view active" id="dayView">
+                <div class="day-header">
+                    <div class="day-title" id="dayTitle">Lundi</div>
+                    <div class="day-date" id="dayDate">2 septembre 2024</div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-period">
+                        <div class="period-title">🌅 Matin (8h - 12h15)</div>
+                        <div class="time-slot" data-time="8h-9h">
+                            <div class="time-label">8h - 9h</div>
+                            <div class="class-info" id="slot-8h">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="9h-10h">
+                            <div class="time-label">9h - 10h</div>
+                            <div class="class-info" id="slot-9h">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="10h-11h">
+                            <div class="time-label">10h - 11h</div>
+                            <div class="class-info" id="slot-10h">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="11h-12h">
+                            <div class="time-label">11h - 12h</div>
+                            <div class="class-info" id="slot-11h">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="12h-12h15">
+                            <div class="time-label">12h - 12h15</div>
+                            <div class="class-info" id="slot-12h">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="time-period">
+                        <div class="period-title">🌇 Après-midi (13h30 - 17h45)</div>
+                        <div class="time-slot" data-time="13h30-14h30">
+                            <div class="time-label">13h30 - 14h30</div>
+                            <div class="class-info" id="slot-13h30">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="14h30-15h30">
+                            <div class="time-label">14h30 - 15h30</div>
+                            <div class="class-info" id="slot-14h30">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="15h30-16h30">
+                            <div class="time-label">15h30 - 16h30</div>
+                            <div class="class-info" id="slot-15h30">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="16h30-17h30">
+                            <div class="time-label">16h30 - 17h30</div>
+                            <div class="class-info" id="slot-16h30">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                        <div class="time-slot" data-time="17h30-17h45">
+                            <div class="time-label">17h30 - 17h45</div>
+                            <div class="class-info" id="slot-17h30">
+                                <div class="empty-slot">Pas de cours</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vue semaine -->
+            <div class="week-view" id="weekView">
+                <div class="week-grid">
+                    <div class="week-header">Horaires</div>
+                    <div class="week-header">Lundi</div>
+                    <div class="week-header">Mardi</div>
+                    <div class="week-header">Mercredi</div>
+                    <div class="week-header">Jeudi</div>
+                    <div class="week-header">Vendredi</div>
+                    
+                    <!-- Matin -->
+                    <div class="week-time">🌅 Matin<br>8h-12h15</div>
+                    <div class="week-cell" id="week-lundi-matin">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-mardi-matin">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-mercredi-matin">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-jeudi-matin">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-vendredi-matin">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    
+                    <!-- Après-midi -->
+                    <div class="week-time">🌇 Après-midi<br>13h30-17h45</div>
+                    <div class="week-cell" id="week-lundi-aprem">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-mardi-aprem">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-mercredi-aprem">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-jeudi-aprem">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                    <div class="week-cell" id="week-vendredi-aprem">
+                        <div class="empty-slot">Pas de cours</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let scheduleData = null;
+        let currentWeek = 36;
+        let currentDay = 'lundi';
+        let currentView = 'day';
+        
+        const dayNames = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi'];
+        const dayNamesDisplay = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
+        
+        // Charger les données depuis le fichier JSON
+        async function loadScheduleData() {
+            try {
+                // Pour la démo, on utilise les données inline
+                scheduleData = {
+                    "meta": {
+                        "title": "M2 FESup Intranet - 2025/2026 - Semestre 1",
+                        "school": "École Normale Supérieure Paris-Saclay"
+                    },
+                    "professeurs": {
+                        "AJ": "Anthony Juton", "PV": "Pascal Varoqui", "FA": "Fabien Adam",
+                        "JPB": "Jean Pierre Barbot", "CD": "Cécile Durieu", "PEL": "Pierre-Etienne Lévy",
+                        "EH": "Emmanuel Hoang", "BLP": "Bruno Le Plouffe", "VL": "Vincent Loyau",
+                        "FM": "Frédéric Mazaleyrat", "JO": "Javier Ojeda", "DC": "Debernardi Christophe",
+                        "JMR": "Jean Marc Roussel", "JMX": "Jean Marcel Rax", "TR": "Thomas Rodet",
+                        "EV": "Eric Vourch", "JSM": "Jérôme Saint-Martin", "MGo": "Michèle Gouiffès",
+                        "FB": "Franck Bimbard", "AB": "Arnaud Bournel", "MA": "Morgan Almanza",
+                        "MAT": "Mohamed Abbas-Turki", "TC": "Thomas Chatain", "MS": "Mihaela Sighireanu"
+                    },
+                    "semaines": {
+                        "35": {"dates": "25 - 30 août", "year": 2024, "startDate": "2024-08-26"},
+                        "36": {"dates": "1 - 6 sept", "year": 2024, "startDate": "2024-09-02"},
+                        "37": {"dates": "8 - 13 sept", "year": 2024, "startDate": "2024-09-09"},
+                        "38": {"dates": "15 - 20 sept", "year": 2024, "startDate": "2024-09-16"},
+                        "39": {"dates": "22 - 27 sept", "year": 2024, "startDate": "2024-09-23"},
+                        "40": {"dates": "29 sept - 04 oct", "year": 2024, "startDate": "2024-09-30"},
+                        "41": {"dates": "6 - 11 oct", "year": 2024, "startDate": "2024-10-07"},
+                        "42": {"dates": "13 - 18 oct", "year": 2024, "startDate": "2024-10-14"},
+                        "43": {"dates": "20 - 25 oct", "year": 2024, "startDate": "2024-10-21"}
+                    },
+                    "planning": {
+                        "36": {
+                            "lundi": {
+                                "matin": {"cours": "AUTO C/TD1", "prof": "JO", "salle": "2Z71", "heure": "8h-12h15"},
+                                "aprem": {"cours": "EN Fond1 Crs1", "prof": "FA", "salle": "2Z48", "heure": "13h30-17h45"}
+                            },
+                            "mardi": {
+                                "matin": {"cours": "CE1", "prof": "MA", "salle": "2Z48", "heure": "8h-12h15"},
+                                "aprem": {"cours": "Présentations leçons", "prof": "Multiple", "salle": "2Z48", "heure": "13h30-17h45"}
+                            },
+                            "mercredi": {
+                                "matin": {"cours": "Journée Portes Ouvertes", "prof": "", "salle": "", "heure": "8h-12h15"},
+                                "aprem": {"cours": "Journée Portes Ouvertes", "prof": "", "salle": "", "heure": "13h30-17h45"}
+                            },
+                            "jeudi": {
+                                "matin": {"cours": "Info C++ C/TP2", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+                                "aprem": {"cours": "Reso1 C/TD1", "prof": "AJ", "salle": "1Z68", "heure": "13h30-17h45"}
+                            },
+                            "vendredi": {
+                                "matin": {"cours": "Info C++ C/TP1", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+                                "aprem": {"cours": "CE2", "prof": "MA", "salle": "2Z48", "heure": "13h30-17h45"}
+                            }
+                        },
+                        "37": {
+                            "lundi": {
+                                "matin": {"cours": "Devoir AUTO", "prof": "JO", "salle": "1Y40", "heure": "8h-12h15"},
+                                "aprem": {"cours": "TS C/TD2", "prof": "CD", "salle": "2Z68", "heure": "13h30-17h45"}
+                            },
+                            "mardi": {
+                                "matin": {"cours": "CE3", "prof": "PEL", "salle": "2Z48", "heure": "8h-12h15"},
+                                "aprem": {"cours": "EN Fond2 TP1", "prof": "JSM", "salle": "2Z34", "heure": "13h30-17h45"}
+                            },
+                            "mercredi": {
+                                "matin": {"cours": "CE EH 2Z28 9h-13h", "prof": "EH", "salle": "2Z28", "heure": "9h-13h"},
+                                "aprem": {"cours": "TS C/TD3", "prof": "CD", "salle": "2Z48", "heure": "13h30-17h45"}
+                            },
+                            "jeudi": {"matin": null, "aprem": null},
+                            "vendredi": {
+                                "matin": {"cours": "WEI", "prof": "", "salle": "", "heure": "8h-12h15"},
+                                "aprem": {"cours": "WEI", "prof": "", "salle": "", "heure": "13h30-17h45"}
+                            }
+                        },
+                        "38": {
+                            "lundi": {
+                                "matin": {"cours": "Info C++ C/TP3", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+                                "aprem": {"cours": "EN Fond3 Crs2", "prof": "JPB", "salle": "2Z48", "heure": "13h30-17h45"}
+                            },
+                            "mardi": {
+                                "matin": {"cours": "GL MS/TR LN82+2Z71 8h30", "prof": "MS+TR", "salle": "LN82+2Z71", "heure": "8h30-12h15"},
+                                "aprem": {"cours": "CE EH", "prof": "EH", "salle": "2Z28", "heure": "13h30-17h45"}
+                            },
+                            "mercredi": {
+                                "matin": {"cours": "ElNum2", "prof": "FA", "salle": "2Z63", "heure": "8h-12h15"},
+                                "aprem": {"cours": "TS C/TP4", "prof": "CD", "salle": "2Z34", "heure": "14h-17h45"}
+                            },
+                            "jeudi": {
+                                "matin": {"cours": "Info C++ C/TP4", "prof": "TR", "salle": "2Z71", "heure": "8h-12h15"},
+                                "aprem": {"cours": "Prés Ep Dossier", "prof": "", "salle": "1Z68", "heure": "13h30-17h45"}
+                            },
+                            "vendredi": {
+                                "matin": {"cours": "ElNum1", "prof": "FA", "salle": "2Z63", "heure": "8h-12h15"},
+                                "aprem": {"cours": "Reso2 TP1", "prof": "AJ", "salle": "GP 2Z71", "heure": "13h30-17h45"}
+                            }
+                        }
+                    }
+                };
+                
+                console.log('Données chargées:', scheduleData);
+                init();
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+            }
+        }
+        
+        function init() {
+            // Déterminer la semaine actuelle
+            const today = new Date();
+            const currentDate = today.getDay(); // 0 = dimanche, 1 = lundi, etc.
+            
+            // Événements
+            document.getElementById('prevWeek').addEventListener('click', () => changeWeek(-1));
+            document.getElementById('nextWeek').addEventListener('click', () => changeWeek(1));
+            document.getElementById('todayBtn').addEventListener('click', goToToday);
+            document.getElementById('dayViewBtn').addEventListener('click', () => changeView('day'));
+            document.getElementById('weekViewBtn').addEventListener('click', () => changeView('week'));
+            
+            // Navigation jour (swipe)
+            let touchStartX = 0;
+            document.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            document.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) { // Seuil de swipe
+                    if (diff > 0) {
+                        changeDay(1); // Swipe vers la gauche = jour suivant
+                    } else {
+                        changeDay(-1); // Swipe vers la droite = jour précédent
+                    }
+                }
+            });
+            
+            updateDisplay();
+        }
+        
+        function changeWeek(direction) {
+            const weeks = Object.keys(scheduleData.planning).map(Number).sort((a, b) => a - b);
+            const currentIndex = weeks.indexOf(currentWeek);
+            const newIndex = currentIndex + direction;
+            
+            if (newIndex >= 0 && newIndex < weeks.length) {
+                currentWeek = weeks[newIndex];
+                updateDisplay();
+            }
+        }
+        
+        function changeDay(direction) {
+            if (currentView !== 'day') return;
+            
+            const currentIndex = dayNames.indexOf(currentDay);
+            let newIndex = currentIndex + direction;
+            
+            if (newIndex < 0) {
+                // Jour précédent = semaine précédente, vendredi
+                changeWeek(-1);
+                currentDay = 'vendredi';
+            } else if (newIndex >= dayNames.length) {
+                // Jour suivant = semaine suivante, lundi
+                changeWeek(1);
+                currentDay = 'lundi';
+            } else {
+                currentDay = dayNames[newIndex];
+            }
+            
+            updateDisplay();
+        }
+        
+        function changeView(view) {
+            currentView = view;
+            
+            // Mettre à jour les boutons
+            document.getElementById('dayViewBtn').classList.toggle('active', view === 'day');
+            document.getElementById('weekViewBtn').classList.toggle('active', view === 'week');
+            
+            // Afficher la bonne vue
+            document.getElementById('dayView').classList.toggle('active', view === 'day');
+            document.getElementById('weekView').classList.toggle('active', view === 'week');
+            
+            updateDisplay();
+        }
+        
+        function goToToday() {
+            // Pour la démo, on va à la semaine 36
+            currentWeek = 36;
+            currentDay = 'lundi';
+            updateDisplay();
+        }
+        
+        function updateDisplay() {
+            updateWeekDisplay();
+            
+            if (currentView === 'day') {
+                updateDayView();
+            } else {
+                updateWeekView();
+            }
+        }
+        
+        function updateWeekDisplay() {
+            const weekInfo = scheduleData.semaines[currentWeek];
+            if (weekInfo) {
+                document.getElementById('currentWeekDisplay').textContent = 
+                    `Semaine ${currentWeek} - ${weekInfo.dates}`;
+            }
+        }
+        
+        function updateDayView() {
+            const dayIndex = dayNames.indexOf(currentDay);
+            document.getElementById('dayTitle').textContent = dayNamesDisplay[dayIndex];
+            
+            // Calculer la date du jour
+            const weekInfo = scheduleData.semaines[currentWeek];
+            if (weekInfo) {
+                const startDate = new Date(weekInfo.startDate);
+                const currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + dayIndex);
+                
+                const options = { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                };
+                document.getElementById('dayDate').textContent = 
+                    currentDate.toLocaleDateString('fr-FR', options);
+            }
+            
+            // Réinitialiser tous les créneaux
+            resetTimeSlots();
+            
+            // Charger les cours du jour
+            const daySchedule = scheduleData.planning[currentWeek]?.[currentDay];
+            if (daySchedule) {
+                if (daySchedule.matin) {
+                    displayCourse(daySchedule.matin, 'matin');
+                }
+                if (daySchedule.aprem) {
+                    displayCourse(daySchedule.aprem, 'aprem');
+                }
+            }
+        }
+        
+        function updateWeekView() {
+            // Réinitialiser la vue semaine
+            resetWeekView();
+            
+            // Charger tous les cours de la semaine
+            const weekSchedule = scheduleData.planning[currentWeek];
+            if (weekSchedule) {
+                dayNames.forEach(day => {
+                    const daySchedule = weekSchedule[day];
+                    if (daySchedule) {
+                        if (daySchedule.matin) {
+                            displayWeekCourse(daySchedule.matin, day, 'matin');
+                        }
+                        if (daySchedule.aprem) {
+                            displayWeekCourse(daySchedule.aprem, day, 'aprem');
+                        }
+                    }
+                });
+            }
+        }
+        
+        function resetTimeSlots() {
+            const timeSlots = document.querySelectorAll('.time-slot');
+            timeSlots.forEach(slot => {
+                slot.classList.remove('has-class');
+                const classInfo = slot.querySelector('.class-info');
+                classInfo.innerHTML = '<div class="empty-slot">Pas de cours</div>';
+            });
+        }
+        
+        function resetWeekView() {
+            dayNames.forEach(day => {
+                ['matin', 'aprem'].forEach(period => {
+                    const cell = document.getElementById(`week-${day}-${period}`);
+                    if (cell) {
+                        cell.classList.remove('has-class');
+                        cell.innerHTML = '<div class="empty-slot">Pas de cours</div>';
+                    }
+                });
+            });
+        }
+        
+        function displayCourse(course, period) {
+            // Trouver les créneaux appropriés selon la période
+            const slots = period === 'matin' ? 
+                ['8h', '9h', '10h', '11h', '12h'] : 
+                ['13h30', '14h30', '15h30', '16h30', '17h30'];
+            
+            // Afficher le cours sur tous les créneaux de la période
+            slots.forEach(time => {
+                const slotElement = document.getElementById(`slot-${time}`);
+                if (slotElement) {
+                    const slot = slotElement.closest('.time-slot');
+                    slot.classList.add('has-class');
+                    
+                    const profName = scheduleData.professeurs[course.prof] || course.prof || 'Professeur non défini';
+                    
+                    slotElement.innerHTML = `
+                        <div class="class-title">${course.cours}</div>
+                        <div class="class-details">
+                            <span class="prof-tag">👨‍🏫 ${profName}</span>
+                            ${course.salle ? `<span class="room-tag">🏫 ${course.salle}</span>` : ''}
+                        </div>
+                    `;
+                }
+            });
+        }
+        
+        function displayWeekCourse(course, day, period) {
+            const cell = document.getElementById(`week-${day}-${period}`);
+            if (cell) {
+                cell.classList.add('has-class');
+                
+                const profName = scheduleData.professeurs[course.prof] || course.prof || '';
+                
+                cell.innerHTML = `
+                    <div class="week-class">
+                        <div class="course-name">${course.cours}</div>
+                        <div class="course-details">
+                            ${profName ? `👨‍🏫 ${profName}` : ''}<br>
+                            ${course.salle ? `🏫 ${course.salle}` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Charger les données au démarrage
+        loadScheduleData();
+    </script>
+</body>
+</html>
