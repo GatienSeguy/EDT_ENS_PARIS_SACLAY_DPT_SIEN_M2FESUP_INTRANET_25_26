@@ -175,32 +175,36 @@
             display: inline-block;
         }
 
-        .time-slot {
+        .course-block {
             display: flex;
             align-items: center;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            border-radius: 0.5rem;
-            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin-bottom: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--accent-color);
             transition: all 0.2s ease;
-        }
-
-        .time-slot:hover {
-            border-color: var(--accent-color);
-            transform: translateX(2px);
-        }
-
-        .time-slot.has-class {
             background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
-            border-color: var(--accent-color);
+            box-shadow: var(--shadow);
+        }
+
+        .course-block:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .time-label {
-            font-weight: 600;
-            color: var(--text-secondary);
-            width: 100px;
+            font-weight: 700;
+            color: var(--primary-color);
+            width: 120px;
             flex-shrink: 0;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            text-align: center;
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-right: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .class-info {
@@ -208,34 +212,51 @@
         }
 
         .class-title {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
         }
 
         .class-details {
             display: flex;
             gap: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
+            font-size: 1rem;
+            flex-wrap: wrap;
         }
 
         .prof-tag {
             background: var(--accent-color);
             color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
         .room-tag {
             background: var(--secondary-color);
             color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.8rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
             font-weight: 500;
+        }
+
+        .empty-day {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 0.75rem;
+            border: 2px dashed var(--border-color);
+        }
+
+        .empty-day-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
 
         .week-view {
@@ -363,22 +384,24 @@
                 margin-bottom: 0.5rem;
             }
 
-            .time-slot {
+            .course-block {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 0.5rem;
-                padding: 0.75rem;
+                gap: 1rem;
+                padding: 1.5rem;
             }
 
             .time-label {
                 width: 100%;
-                font-weight: 700;
-                color: var(--primary-color);
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+                text-align: left;
             }
 
             .class-details {
                 flex-direction: column;
                 gap: 0.5rem;
+                width: 100%;
             }
 
             .day-header {
@@ -443,69 +466,15 @@
                 <div class="time-slots">
                     <div class="time-period">
                         <div class="period-title">🌅 Matin (8h - 12h15)</div>
-                        <div class="time-slot" data-time="8h-9h">
-                            <div class="time-label">8h - 9h</div>
-                            <div class="class-info" id="slot-8h">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="9h-10h">
-                            <div class="time-label">9h - 10h</div>
-                            <div class="class-info" id="slot-9h">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="10h-11h">
-                            <div class="time-label">10h - 11h</div>
-                            <div class="class-info" id="slot-10h">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="11h-12h">
-                            <div class="time-label">11h - 12h</div>
-                            <div class="class-info" id="slot-11h">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="12h-12h15">
-                            <div class="time-label">12h - 12h15</div>
-                            <div class="class-info" id="slot-12h">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
+                        <div id="morningSlot">
+                            <!-- Cours du matin sera ajouté ici -->
                         </div>
                     </div>
                     
                     <div class="time-period">
                         <div class="period-title">🌇 Après-midi (13h30 - 17h45)</div>
-                        <div class="time-slot" data-time="13h30-14h30">
-                            <div class="time-label">13h30 - 14h30</div>
-                            <div class="class-info" id="slot-13h30">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="14h30-15h30">
-                            <div class="time-label">14h30 - 15h30</div>
-                            <div class="class-info" id="slot-14h30">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="15h30-16h30">
-                            <div class="time-label">15h30 - 16h30</div>
-                            <div class="class-info" id="slot-15h30">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="16h30-17h30">
-                            <div class="time-label">16h30 - 17h30</div>
-                            <div class="class-info" id="slot-16h30">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
-                        </div>
-                        <div class="time-slot" data-time="17h30-17h45">
-                            <div class="time-label">17h30 - 17h45</div>
-                            <div class="class-info" id="slot-17h30">
-                                <div class="empty-slot">Pas de cours</div>
-                            </div>
+                        <div id="afternoonSlot">
+                            <!-- Cours de l'après-midi sera ajouté ici -->
                         </div>
                     </div>
                 </div>
@@ -675,10 +644,6 @@
         }
         
         function init() {
-            // Déterminer la semaine actuelle
-            const today = new Date();
-            const currentDate = today.getDay(); // 0 = dimanche, 1 = lundi, etc.
-            
             // Événements
             document.getElementById('prevWeek').addEventListener('click', () => changeWeek(-1));
             document.getElementById('nextWeek').addEventListener('click', () => changeWeek(1));
@@ -696,11 +661,11 @@
                 const touchEndX = e.changedTouches[0].clientX;
                 const diff = touchStartX - touchEndX;
                 
-                if (Math.abs(diff) > 50) { // Seuil de swipe
+                if (Math.abs(diff) > 50) {
                     if (diff > 0) {
-                        changeDay(1); // Swipe vers la gauche = jour suivant
+                        changeDay(1);
                     } else {
-                        changeDay(-1); // Swipe vers la droite = jour précédent
+                        changeDay(-1);
                     }
                 }
             });
@@ -726,11 +691,9 @@
             let newIndex = currentIndex + direction;
             
             if (newIndex < 0) {
-                // Jour précédent = semaine précédente, vendredi
                 changeWeek(-1);
                 currentDay = 'vendredi';
             } else if (newIndex >= dayNames.length) {
-                // Jour suivant = semaine suivante, lundi
                 changeWeek(1);
                 currentDay = 'lundi';
             } else {
@@ -743,11 +706,9 @@
         function changeView(view) {
             currentView = view;
             
-            // Mettre à jour les boutons
             document.getElementById('dayViewBtn').classList.toggle('active', view === 'day');
             document.getElementById('weekViewBtn').classList.toggle('active', view === 'week');
             
-            // Afficher la bonne vue
             document.getElementById('dayView').classList.toggle('active', view === 'day');
             document.getElementById('weekView').classList.toggle('active', view === 'week');
             
@@ -755,7 +716,6 @@
         }
         
         function goToToday() {
-            // Pour la démo, on va à la semaine 36
             currentWeek = 36;
             currentDay = 'lundi';
             updateDisplay();
@@ -800,19 +760,58 @@
                     currentDate.toLocaleDateString('fr-FR', options);
             }
             
-            // Réinitialiser tous les créneaux
-            resetTimeSlots();
+            // Réinitialiser les créneaux
+            document.getElementById('morningSlot').innerHTML = '';
+            document.getElementById('afternoonSlot').innerHTML = '';
             
             // Charger les cours du jour
             const daySchedule = scheduleData.planning[currentWeek]?.[currentDay];
+            let hasClasses = false;
+            
             if (daySchedule) {
                 if (daySchedule.matin) {
-                    displayCourse(daySchedule.matin, 'matin');
+                    hasClasses = true;
+                    const courseBlock = createCourseBlock(daySchedule.matin, '8h - 12h15');
+                    document.getElementById('morningSlot').appendChild(courseBlock);
                 }
                 if (daySchedule.aprem) {
-                    displayCourse(daySchedule.aprem, 'aprem');
+                    hasClasses = true;
+                    const courseBlock = createCourseBlock(daySchedule.aprem, '13h30 - 17h45');
+                    document.getElementById('afternoonSlot').appendChild(courseBlock);
                 }
             }
+            
+            // Afficher message si pas de cours
+            if (!daySchedule || (!daySchedule.matin && !daySchedule.aprem)) {
+                if (!daySchedule?.matin) {
+                    document.getElementById('morningSlot').innerHTML = 
+                        '<div class="empty-slot" style="text-align: center; padding: 2rem; color: var(--text-secondary); font-style: italic;">Pas de cours le matin</div>';
+                }
+                if (!daySchedule?.aprem) {
+                    document.getElementById('afternoonSlot').innerHTML = 
+                        '<div class="empty-slot" style="text-align: center; padding: 2rem; color: var(--text-secondary); font-style: italic;">Pas de cours l\'après-midi</div>';
+                }
+            }
+        }
+        
+        function createCourseBlock(course, timeRange) {
+            const courseBlock = document.createElement('div');
+            courseBlock.className = 'course-block';
+            
+            const profName = scheduleData.professeurs[course.prof] || course.prof || 'Professeur non défini';
+            
+            courseBlock.innerHTML = `
+                <div class="time-label">${timeRange}</div>
+                <div class="class-info">
+                    <div class="class-title">${course.cours}</div>
+                    <div class="class-details">
+                        <span class="prof-tag">👨‍🏫 ${profName}</span>
+                        ${course.salle ? `<span class="room-tag">🏫 ${course.salle}</span>` : ''}
+                    </div>
+                </div>
+            `;
+            
+            return courseBlock;
         }
         
         function updateWeekView() {
@@ -836,15 +835,6 @@
             }
         }
         
-        function resetTimeSlots() {
-            const timeSlots = document.querySelectorAll('.time-slot');
-            timeSlots.forEach(slot => {
-                slot.classList.remove('has-class');
-                const classInfo = slot.querySelector('.class-info');
-                classInfo.innerHTML = '<div class="empty-slot">Pas de cours</div>';
-            });
-        }
-        
         function resetWeekView() {
             dayNames.forEach(day => {
                 ['matin', 'aprem'].forEach(period => {
@@ -854,32 +844,6 @@
                         cell.innerHTML = '<div class="empty-slot">Pas de cours</div>';
                     }
                 });
-            });
-        }
-        
-        function displayCourse(course, period) {
-            // Trouver les créneaux appropriés selon la période
-            const slots = period === 'matin' ? 
-                ['8h', '9h', '10h', '11h', '12h'] : 
-                ['13h30', '14h30', '15h30', '16h30', '17h30'];
-            
-            // Afficher le cours sur tous les créneaux de la période
-            slots.forEach(time => {
-                const slotElement = document.getElementById(`slot-${time}`);
-                if (slotElement) {
-                    const slot = slotElement.closest('.time-slot');
-                    slot.classList.add('has-class');
-                    
-                    const profName = scheduleData.professeurs[course.prof] || course.prof || 'Professeur non défini';
-                    
-                    slotElement.innerHTML = `
-                        <div class="class-title">${course.cours}</div>
-                        <div class="class-details">
-                            <span class="prof-tag">👨‍🏫 ${profName}</span>
-                            ${course.salle ? `<span class="room-tag">🏫 ${course.salle}</span>` : ''}
-                        </div>
-                    `;
-                }
             });
         }
         
