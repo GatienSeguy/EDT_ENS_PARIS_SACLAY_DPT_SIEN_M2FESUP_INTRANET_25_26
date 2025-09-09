@@ -228,15 +228,12 @@ async function init(){
   ALL_EVENTS = events;
   GROUPED = groupByDay(events);
 
-  // On force à afficher la date du jour J (même si pas prévue dans le JSON)
-    var todayKey = CURRENT_DATE.toISOString().slice(0,10);
-    if(GROUPED.has(todayKey)){
-    // il y a des cours aujourd'hui
-    renderDay();
-    } else {
-    // pas de cours aujourd'hui mais on reste sur la vraie date du jour
-    renderDay();
-    }
+  var todayKey = CURRENT_DATE.toISOString().slice(0,10);
+  if(!GROUPED.has(todayKey)){
+    var keys = Array.from(GROUPED.keys()).sort();
+    if(keys.length) CURRENT_DATE = new Date(keys[0] + "T00:00:00");
+  }
+  renderDay();
 }
 
 init();
